@@ -1,4 +1,33 @@
+const express = require('express');
+
+//Routers
+const { toDoRouter } = require('./routes/toDo.routes');
+
+//utils
+const { sequelize } = require('./util/database');
+
 // Create server Express
+const app = express();
+
+//Enable Json incomming data
+app.use(express.json());
+
+//EndPoint
+app.use('/api/v1/toDo', toDoRouter);
+
+sequelize
+  .authenticate()
+  .then(() => console.log('Database authenticate'))
+  .catch((err) => console.log(err));
+
+sequelize
+  .sync()
+  .then(() => console.log('Database synced'))
+  .catch((err) => console.log(err));
+
+app.listen(4000, () => {
+  console.log('Express app runnin');
+});
 
 // Define endpoint for ToDos
 // GET fetch all ToDos
