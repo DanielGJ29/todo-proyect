@@ -12,24 +12,29 @@ const App = () => {
 	const [todos, setTodos] = useState([]);
 
 	const addTodo = async todo => {
-		await axios.post(`http://localhost:4000/`, {
-			content: todo.content,
+		await axios.post(`http://localhost:4000/api/v1/toDo`, {
+			//content: todo.content,
+			toDo:todo.content,
+			status:'active'
 		}); // req.body.content
 
 		setTodos(prevState => [...prevState, todo]);
 	};
 
 	const fetchTodos = async () => {
-		const res = await axios.get('http://localhost:4000/');
+		const res = await axios.get('http://localhost:4000/api/v1/toDo');
 
 		const resTodos = res.data;
-		console.log(resTodos);
-		setTodos(resTodos);
+		console.log("setTodos",resTodos.data.tododata);
+		setTodos(resTodos.data.tododata);
 	};
 
 	const editTodo = async (id, newContent) => {
-		await axios.patch(`http://localhost:4000/`, {
-			content: newContent,
+		console.log("ID", id);
+		console.log("content", newContent);
+	
+		await axios.patch(`http://localhost:4000/api/v1/toDo/${id}`, {
+			toDo: newContent,
 		});
 
 		setTodos(prevState => {
@@ -48,7 +53,7 @@ const App = () => {
 	};
 
 	const deleteTodo = async id => {
-		await axios.delete(`http://localhost:4000/`);
+		await axios.delete(`http://localhost:4000/api/v1/toDo/${id}`);
 
 		setTodos(prevState => {
 			const currentTodos = prevState;
