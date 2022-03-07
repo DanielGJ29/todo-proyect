@@ -1,6 +1,5 @@
 const { Todo } = require('../models/todos.model');
 
-
 // Utils
 const { filterObj } = require('../util/filterObj');
 
@@ -42,17 +41,15 @@ exports.getToDoById = async (req, res) => {
         toDo
       }
     });
-
   } catch (error) {
     console.log(error);
   }
 };
 
-
 // //?save ToDo
 exports.createToDo = async (req, res) => {
   try {
-    const { toDo,status } = req.body;
+    const { toDo, status } = req.body;
 
     const newToDo = await Todo.create({ toDo, status });
 
@@ -65,15 +62,14 @@ exports.createToDo = async (req, res) => {
   }
 };
 
-
 // //?Update toDo (patch)
 exports.updateToDoPatch = async (req, res) => {
   try {
     const { id } = req.params;
-  
+
     const data = filterObj(req.body, 'toDo');
 
-    const toDo = await Todo.findOne({ where: { id: id}});
+    const toDo = await Todo.findOne({ where: { id: id } });
 
     if (!toDo) {
       res.status(404).json({
@@ -93,7 +89,6 @@ exports.updateToDoPatch = async (req, res) => {
   }
 };
 
-
 //? Delete toDo
 exports.deleteToDo = async (req, res) => {
   try {
@@ -110,8 +105,6 @@ exports.deleteToDo = async (req, res) => {
       });
       return;
     }
-
- 
 
     //? Soft delete
     await todoData.update({ status: 'deleted' });

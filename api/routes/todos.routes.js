@@ -3,9 +3,9 @@ const express = require('express');
 const {
   getAllToDos,
   getToDoById,
-   createToDo,
-   updateToDoPatch,
-   deleteToDo
+  createToDo,
+  updateToDoPatch,
+  deleteToDo
 } = require('../controllers/todos.controller');
 
 const router = express.Router();
@@ -20,7 +20,5 @@ router.patch('/:id', updateToDoPatch);
 
 router.delete('/:id', deleteToDo);
 
-
-
-  // module.exports =  router ;
-  module.exports = { todosRouter: router };
+// module.exports =  router ;
+module.exports = { todosRouter: router };
