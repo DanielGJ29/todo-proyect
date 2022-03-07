@@ -3,10 +3,10 @@ const { DataTypes } = require('sequelize');
 //Utils
 const { sequelize } = require('../util/database');
 
-const Todo = sequelize.define('todo', {
+const Todo = sequelize.define('todos', {
   id: {
     primaryKey: true,
-    type: DataTypes.INTEGER,
+    type: DataTypes.BIGINT,
     autoIncrement: true,
     allowNull: false
   },

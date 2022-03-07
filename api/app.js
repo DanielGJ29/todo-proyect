@@ -1,7 +1,8 @@
 const express = require('express');
+var cors = require('cors');
 
 //Routers
-const { toDoRouter } = require('./routes/toDo.routes');
+const { todosRouter } = require('./routes/todos.routes');
 
 //utils
 const { sequelize } = require('./util/database');
@@ -9,11 +10,15 @@ const { sequelize } = require('./util/database');
 // Create server Express
 const app = express();
 
+//cors
+app.use(cors());
+
 //Enable Json incomming data
 app.use(express.json());
 
 //EndPoint
-app.use('/api/v1/toDo', toDoRouter);
+app.use('/api/v1/toDo', todosRouter);
+
 
 sequelize
   .authenticate()
